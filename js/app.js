@@ -4,10 +4,26 @@
 				// querySelectorAll is for a one to many relationship and returns a NodeList (an array) of matching elements
 				puzzlePieces = document.querySelectorAll(".puzzle-image"),
 				dropZones = document.querySelectorAll(".drop-zone"),
-				gameBoard = document.querySelector(".puzzle-board"); // one to one relationship -> returns the first matching element
-				
+				gameBoard = document.querySelector(".puzzle-board"), // one to one relationship -> returns the first matching element
+				puzzleArea = document.querySelector(".puzzle-pieces"),
+				replayButton = document.querySelector("#replay");
+								
+	
+	let puzzleNo=0;			
 
 	let imageNames = ["topLeft", "topRight", "bottomLeft", "bottomRight"];
+
+
+	function resetPuzzlePieces (){
+				let puzzleArea = document.querySelector(".puzzle-pieces");
+				//console.log(puzzleArea);
+				for (let zone of dropZones) {
+						console.log(zone.firstChild);
+						if(zone.firstChild){
+							puzzleArea.appendChild(zone.firstChild);
+						}
+				}
+	}
 
 	// add event handling here -> how is the user going to use our app?
 	// what triggers do we need?
@@ -22,7 +38,17 @@
 		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgkey}.jpg)`;
 
 		resetPuzzlePieces ();
+
+
+
+		puzzleNo=this.dataset.bgkey;
+
 	}
+
+	function resetPuzzle(){
+			changeImageSet.call(puzzleButtons[puzzleNo]);
+	}
+
 
 	function allowDrag(event) {
 		// let the drag happen, and store a reference of the ID of the element we're dragging
@@ -58,6 +84,7 @@
 	// click on the bottom buttons to change the puzzle image we're working with
 	puzzleButtons.forEach(button => button.addEventListener('click', changeImageSet));
 	puzzlePieces.forEach(piece => piece.addEventListener('dragstart', allowDrag));
+	replayButton.addEventListener('click',resetPuzzle);
 
 	for (let zone of dropZones) {
 		zone.addEventListener('dragover', allowDragOver);
