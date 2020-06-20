@@ -6,7 +6,7 @@ This is my 1055-01-20S Troubleshooting assignment,This is an error correction As
 
 
 ## Installation
-Just clone the repo anywhere on your computer and create a new branch!
+Just clone the repo anywhere on your computer and create two new branch!
 
 ## MIT License
 MIT License
